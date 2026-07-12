@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 
 @Import(MemoryConfig.class)
+// controller만 컴포넌트 스캔을 하겠다
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
@@ -17,6 +18,7 @@ public class ItemServiceApplication {
 		SpringApplication.run(ItemServiceApplication.class, args);
 	}
 
+	// "local" 이라는 프로필이 활성화 되어 있는 경우에만, 스프링 빈을 등록
 	@Bean
 	@Profile("local")
 	public TestDataInit testDataInit(ItemRepository itemRepository) {

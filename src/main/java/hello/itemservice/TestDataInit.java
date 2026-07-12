@@ -16,6 +16,8 @@ public class TestDataInit {
     /**
      * 확인용 초기 데이터 추가
      */
+    // 스프링 컨테이너가 완전히 초기화를 다 끝내고, 실행 준비가 되었을 때 발생하는 이벤트
+    // @PostConstruct 의 경우에는, AOP 같은 부분들이 아직 다 처리되지 않은 시점에서 호출될 수도 있으므로 @EventListener(ApplicationReadyEvent.class) 사용
     @EventListener(ApplicationReadyEvent.class)
     public void initData() {
         log.info("test data init");
