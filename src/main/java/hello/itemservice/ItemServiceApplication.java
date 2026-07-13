@@ -10,8 +10,9 @@ import org.springframework.context.annotation.Profile;
 
 
 // @Import(MemoryConfig.class)
-@Import(JdbcTemplateV1Config.class)
 // controller만 컴포넌트 스캔을 하겠다
+// @Import(JdbcTemplateV1Config.class)
+@Import(JdbcTemplateV2Config.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 

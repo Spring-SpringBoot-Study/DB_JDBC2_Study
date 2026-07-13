@@ -47,7 +47,7 @@ public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
     public Item save(Item item) {
         // ? 로 파라미터를 넘기는 것이 아니라 :itemName 처럼 이름으 지정해서 파라미터를 넘김
         String sql = "insert into item (item_name, price, quantity) " + "values (:itemName, :price, :quantity)";
-
+        // getter, setter를 이용해서 데이터를 자동으로 만들어 줌
         SqlParameterSource param = new BeanPropertySqlParameterSource(item);
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(sql, param, keyHolder);
