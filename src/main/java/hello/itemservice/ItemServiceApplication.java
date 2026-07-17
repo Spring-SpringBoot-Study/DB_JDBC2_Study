@@ -12,13 +12,13 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
-
+@Slf4j
 // @Import(MemoryConfig.class)
 // controller만 컴포넌트 스캔을 하겠다
 // @Import(JdbcTemplateV1Config.class)
 // @Import(JdbcTemplateV2Config.class)
-@Slf4j
-@Import(JdbcTemplateV3Config.class)
+// @Import(JdbcTemplateV3Config.class)
+@Import(MyBatisConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
