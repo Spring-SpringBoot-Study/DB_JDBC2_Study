@@ -34,17 +34,17 @@ public class ItemServiceApplication {
 	}
 
 	// 테스트용으로 사용할 데이터베이스를 수동으로 직접 만들지 않고, 서버가 뜰때만 사용했다가 서버가 내려가면 같이 사라짐
-	@Bean
-	@Profile("test")
-	public DataSource dataSource() {
-		log.info("메모리 데이터베이스 초기화");
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
-		dataSource.setUsername("sa");
-		dataSource.setPassword("");
-
-		return dataSource;
-	}
+//	@Bean
+//	@Profile("test")
+//	public DataSource dataSource() {
+//		log.info("메모리 데이터베이스 초기화");
+//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		dataSource.setDriverClassName("org.h2.Driver");
+//		dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
+//		dataSource.setUsername("sa");
+//		dataSource.setPassword("");
+//
+//		return dataSource;
+//	}
 
 }
