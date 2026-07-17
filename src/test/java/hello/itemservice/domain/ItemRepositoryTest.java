@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// @SpringBootTest 가 있으면, @SpringBootApplication가 붙어 있는 것을 설정으로 사용함
 @SpringBootTest
 class ItemRepositoryTest {
 
@@ -69,7 +70,7 @@ class ItemRepositoryTest {
         itemRepository.save(item2);
         itemRepository.save(item3);
 
-        //둘 다 없음 검증
+        //둘 다 없음 검증 - itemName이 null, maxPrice가 null로 검색을 했으면 위의 item1, item2, item3 모두 조회되어야 함.
         test(null, null, item1, item2, item3);
         test("", null, item1, item2, item3);
 
