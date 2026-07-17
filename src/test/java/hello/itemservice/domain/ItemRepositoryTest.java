@@ -4,19 +4,25 @@ import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import hello.itemservice.repository.memory.MemoryItemRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// @Commit 또는 @Rollback(value = false) 을 사용하면, Rollback되지 않고 commit됨 -> 저장 결과를 실제 DB에서 확인
+// @Commit
+@Transactional // 각 테스트 이후에 transaction이 롤백이 되어 테스트 데이터들이 DB에 commit되지 않고 Rollback됨.
 // @SpringBootTest 가 있으면, @SpringBootApplication가 붙어 있는 것을 설정으로 사용함
 @SpringBootTest
 class ItemRepositoryTest {
@@ -24,17 +30,18 @@ class ItemRepositoryTest {
     @Autowired
     ItemRepository itemRepository;
 
-    //트랜잭션 관련 코드
-    @Autowired
-    PlatformTransactionManager transactionManager;
-    TransactionStatus status;
-
-    @BeforeEach
-    void beforeEach() {
-        // 트랜잭션 시작
-        status = transactionManager.getTransaction(new DefaultTransactionDefinition());
-    }
-
+    // @Transactional 사용을 위한 주석처리
+//    //트랜잭션 관련 코드
+//    @Autowired
+//    PlatformTransactionManager transactionManager;
+//    TransactionStatus status;
+//
+//    @BeforeEach
+//    void beforeEach() {
+//        // 트랜잭션 시작
+//        status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+//    }
+//
     @AfterEach
     void afterEach() {
         //MemoryItemRepository 의 경우 제한적으로 사용
@@ -42,8 +49,8 @@ class ItemRepositoryTest {
             ((MemoryItemRepository) itemRepository).clearStore();
         }
 
-        //트랜잭션 롤백 -> 저장된 데이터가 사라짐
-        transactionManager.rollback(status);
+        // 트랜잭션 롤백 -> 저장된 데이터가 사라짐
+        // transactionManager.rollback(status);
     }
 
     @Test
