@@ -38,21 +38,24 @@ public class JpaItemRepositoryV1 implements ItemRepository {
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
 
-        // transaction이 commit되는 순간에 알아서 update가 적용이됨.
+        // transaction이 commit되는 순간에 알아서 update가 적용이 됨.
+        // commit되는 시점에 변경된 엔티티 객체가 있는지 확인한 후, 엔티티 객체가 변경된 경우에 UPDATE SQL을 실행 - 영속성 컨텍스트
     }
 
     @Override
     public Optional<Item> findById(Long id) {
-        Item item = em.find(Item.class, id);
+        Item item = em.find(Item.class, id); // PK 기준으로 JPA에서 엔티티 객체를 조회할 때 find() 사용
 
         return Optional.ofNullable(item);
     }
 
     @Override
     public List<Item> findAll(ItemSearchCond cond) {
+        // java persistence query language 사용
         String jpql = "select i from Item i"; // Item 엔티티 자체를 가져옴
 
         // 동적 쿼리
+        // 이전 jdbc 방식에서의 동적 쿼리 문제를 해결하기 어려움 -> Querydsl 기술로 이를 해결함(실무에서는 JPA + Querydsl이 거의 필수임)
         Integer maxPrice = cond.getMaxPrice();
         String itemName = cond.getItemName();
 
