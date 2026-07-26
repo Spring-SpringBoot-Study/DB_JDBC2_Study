@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.Optional;
 
+// 순수 JPA
 @Slf4j
 @Repository
 @Transactional

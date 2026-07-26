@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
+// Spring Data JPA
 // JpaRepository<관리할 Entity, 관리할 Entity의 PK 타입> 의 형태로 extends 함 -> JpaRepository<Item, Long>
 public interface SpringDataJpaItemRepository extends JpaRepository<Item, Long>
 {
